@@ -37,9 +37,10 @@
 			]
 		},
 	];
+
 </script>
 <h1 class="text-3xl font-bold">Example</h1>
 <input type="checkbox" id="debug" on:click={()=> {_debug = !_debug}}/>
-<label for="debug">Debug</label>
+<label for="debug">Debug</label><br>
 
 <FormRenderer formBuilderData={formBuilderData} debug={_debug}/>
