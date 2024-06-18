@@ -16,3 +16,8 @@ type FormBuilderData = {
 	content?: any,
 	class?: string,
 }
+
+type ToolBarItem = {
+	type: string,
+	draggableItems: FormBuilderData[]
+}

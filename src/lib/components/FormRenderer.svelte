@@ -1,14 +1,7 @@
 <script lang="ts">
    import type { FormBuilderData } from "$lib/index.d";
-    import { onMount } from "svelte";
-
 	export let formBuilderData: FormBuilderData[] = [];
 	export let debug: boolean = false;
-
-	onMount(() => {
-		console.log(typeof formBuilderData, formBuilderData);
-	});
-
 </script>
 
 {#if Array.isArray(formBuilderData)}
