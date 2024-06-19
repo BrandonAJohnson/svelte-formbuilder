@@ -1,5 +1,5 @@
 <script>
-	import { theme, toggleTheme } from "$lib/theme";
+	import { theme, toggleTheme } from "$lib/stores/theme";
 	import { Moon, Sun } from "lucide-svelte";
 	import { fly } from "svelte/transition";
 </script>

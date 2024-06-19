@@ -1,64 +1,38 @@
 <script lang="ts">
    import type { FormBuilderData } from "$lib/index.d";
-
    import FormRenderer from "$lib/components/FormRenderer.svelte";
+	import { debug, setDebug } from "$lib/stores/debug";
+   import Grid from "$lib/components/layout/Grid.svelte";
+	import Col from "$lib/components/layout/Col.svelte";
+   import { setCurrentComponent } from "$lib/stores/component";
 
-	let _debug = false;
-
-	const formBuilderData: FormBuilderData[] = [
-		// {
-		// 	type: 'p',
-		// 	name: '<p>',
-		// 	content: 'This is a paragraph',
-		// 	class: 'font-bold text-xl',
-		// },
-		// {
-		// 	type: Panel,
-		// 	name: 'Panel',
-		// 	props: {
-		// 		collapsible: true,
-		// 		headerText: 'This is a Header',
-		// 	},
-		// 	children: [
-		// 		{
-		// 			type: 'div',
-		// 			name: '<div>',
-		// 			children: [
-		// 				{
-		// 					type: 'p',
-		// 					name: '<p>',
-		// 					content: 'This is a double nested body',
-		// 					props: {
-		// 						class: 'text-blue',
-		// 					}
-		// 				}
-		// 			],
-		// 		},
-		// 	]
-		// },
+	let formBuilderData: FormBuilderData[] = [
+		{
+			name: 'Grid',
+			type: Grid,
+			id: 0,
+			props: {
+				cols: 1,
+			},
+			children: [
+				{
+					name: 'Col',
+					type: Col,
+					id: 1,
+					canBeDroppedInto: true,
+					children: []
+				}
+			],
+			canBeDroppedInto: false,
+		}
 	];
 
-
-	function onDragEnter(e: any) {
-		console.log('onDragEnter', e);
-	}
-
-	function onDrop(e: any) {
-		console.log('onDrop', e);
-	}
-
-	function onDragLeave(e: DragEvent) {
-		console.log("onDragLeave", e);
-	}
+	setCurrentComponent(formBuilderData[0]);
 </script>
 
-<input type="checkbox" id="debug" on:click={()=> {_debug = !_debug}}/>
+<input type="checkbox" id="debug" on:click={()=> {setDebug(!$debug)}}/>
 <label for="debug">Debug</label><br>
 
-<div id="edit-area"
-	on:dragenter={onDragEnter}
-	on:drop={onDrop}
-	on:dragleave={onDragLeave}
-	aria-dropeffect="copy" role="region" class="h-full border border-slate-900">
-	<FormRenderer formBuilderData={formBuilderData} debug={_debug}/>
+<div id="edit-area" class="h-full">
+	<FormRenderer formBuilderData={formBuilderData} />
 </div>
